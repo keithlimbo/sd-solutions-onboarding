@@ -49,9 +49,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
             case ConnectionState.done:
               final data = snapshot.data;
-              final createdDate = DateTime.parse(data?["CreatedDate"]);
-              String formattedCreatedDate =
-                  DateFormat("MMMM dd, yyyy").format(createdDate);
+              final createdDate = data?["CreatedDate"] != null
+                  ? DateTime.parse(data?["CreatedDate"])
+                  : null;
+              String formattedCreatedDate = createdDate != null
+                  ? DateFormat("MMMM dd, yyyy").format(createdDate)
+                  : "";
               return ListView(
                 padding: const EdgeInsets.all(24.0),
                 children: [
