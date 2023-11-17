@@ -85,4 +85,16 @@ class AuthRepository {
           'Content-Type': "application/json"
         }));
   }
+
+  Future updateStatus(int id, bool isActive) async {
+    String? userBearerToken = await UserStoredPref().getBearerToken();
+    await dio.put("${ApiHelper.status}/$id",
+        data: {
+          "is_active": isActive,
+        },
+        options: Options(headers: {
+          'Authorization': "Bearer $userBearerToken",
+          'Content-Type': "application/json"
+        }));
+  }
 }
